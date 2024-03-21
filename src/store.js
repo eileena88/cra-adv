@@ -12,7 +12,7 @@ export const cartInit = {
 export const cartReducer = (state, action) => {
     // console.log('state', state)
     // console.log('action', stactionate)
-    const cartList = [state.cartList];
+    const cartList = [...state.cartList];
     console.log(cartList)
     // #1 先取得當前購物車目標品項的索引
     console.log(action.payload)

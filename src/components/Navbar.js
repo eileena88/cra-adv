@@ -3,8 +3,8 @@ import { CartContext } from "../store"
 
 export default function Navbar() {
   const [state] = useContext(CartContext);
-  let sum = 0
-  state.cartList.map((item) => sum += item.quantity);
+  /* let sum = 0
+  state.cartList.map((item) => sum += item.quantity); */
 
   return (
     <nav className="navbar bg-body-tertiary">
@@ -13,7 +13,7 @@ export default function Navbar() {
         <button className="btn btn-outline-dark position-relative" type="submit">
           購物車
           <span className="badge rounded-pill text-bg-danger
-            position-absolute top-0 start-100 translate-middle">{sum}</span>
+            position-absolute top-0 start-100 translate-middle">{/* sum */state.totlaNums||0}</span>
         </button>
       </div>
     </nav>);

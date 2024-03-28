@@ -1,23 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import productsData from "../assets/productsData";
 import { CartContext } from "../store";
 
 
 export default function Products() {
     const [state, dispatch] = useContext(CartContext);
+    const [addQuantity, setAddQuantity] = useState(1);
     return (<>
         <div className="row row-cols-3 g-3">
             {productsData.map((product) => {
                 return (
                     <div className="col" key={product.id}>
                         <div className="card">
-                            <img src={product.img} className="card-img-top" alt="..." />
+                            <img src={product.img} className="card-img-top" alt={product.title} />
                             <div className="card-body">
                                 <h6 className="card-title">
                                     {product.title}
                                     <span className="float-end">{`NT$ ${product.price}`}</span>
                                 </h6>
-                                <select name="" id={`selectQuantity${product.id}`} className="form-select">
+                                <select className="form-select"
+                                  onChange={(e) => {
+                                    e.preventDefault();
+                                    setAddQuantity(parseInt(e.target.value));
+                                  }}
+                                  value={addQuantity}
+                                >
                                     {
                                         [...Array(20)].map((_, i) => {
                                             return (
@@ -32,9 +39,10 @@ export default function Products() {
                                             type: "ADD_TO_CART",
                                             payload: {
                                                 ...product,
-                                                quantity: parseInt(document.getElementById(`selectQuantity${product.id}`).value)
+                                                quantity: addQuantity
                                             }
-                                        })
+                                        });
+                                        setAddQuantity(1);
                                     }}>
                                     加入購物車
                                 </button>

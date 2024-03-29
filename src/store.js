@@ -1,12 +1,12 @@
 import { createContext } from "react";
 
 function calculateTotalNums(cartList) {
-  return cartList.map(item => item.quantity)
+  return cartList.map(item => item.quantity > 20 ? 20 : item.quantity)
     .reduce((a, b) => a + b, 0);
 }
 
 function calculateTotalPrice(cartList) {
-    return cartList.map((item) => item.quantity * item.price)
+    return cartList.map((item) => (item.quantity > 20 ? 20 : item.quantity) * item.price)
       .reduce((a, b) => a + b, 0);
 }
 

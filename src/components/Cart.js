@@ -11,18 +11,19 @@ export default function Cart() {
                     {state.cartList.map((item) => {
                         return (
                             <tr key={item.id}>
+
                                 <td>
                                     <button type="button" className="btn btn-sm"
-                                    onClick={
-                                        () => {
-                                            dispatch({
-                                                type: "REMOVE_CART_ITEM",
-                                                payload: {
-                                                    ...item
-                                                }
-                                            })
-                                        }
-                                    }>x</button>
+                                        onClick={
+                                            () => {
+                                                dispatch({
+                                                    type: "REMOVE_CART_ITEM",
+                                                    payload: {
+                                                        ...item
+                                                    }
+                                                })
+                                            }
+                                        }>x</button>
                                 </td>
                                 <td>
                                     <img className="table-img" src={item.img} alt="" />
@@ -33,35 +34,39 @@ export default function Cart() {
                                 </td>
                                 <td>
                                     <select name="" id="" className="form-select"
-                                    value={item.quantity}
-                                    onChange={(e) => {
-                                        e.preventDefault();
-                                        const quantity = parseInt(e.target.value);
-                                        dispatch({
-                                            type: "CHANGE_CART_QUANTITY",
-                                            payload: {
-                                                ...item,
-                                                quantity: quantity
-                                            }
-                                        })
+                                        value={item.quantity > 20 ? 20 : item.quantity}
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            const quantity = parseInt(e.target.value);
+                                            dispatch({
+                                                type: "CHANGE_CART_QUANTITY",
+                                                payload: {
+                                                    ...item,
+                                                    quantity: quantity
+                                                }
+                                            })
 
-                                    }}>
+                                        }}>
                                         {
                                             [...Array(20)].map((_, i) => {
                                                 return (
-                                                    <option value={i+1} key={i}>{i + 1}</option>
+                                                    <option value={i + 1} key={i}>{i + 1}</option>
                                                 )
                                             })
                                         }
                                     </select>
+                                    {item.quantity > 20 && (
+                                        <small className="text-danger">已超過購買上限</small>
+                                    )}
                                 </td>
                                 <td className="text-end">
-                                    NT$ {item.price * item.quantity}
+                                    NT$ {item.price * (item.quantity > 20 ? 20 : item.quantity)}
                                 </td>
+
+
                             </tr>
                         )
                     })}
-
                 </tbody>
                 <tfoot>
                     <tr>

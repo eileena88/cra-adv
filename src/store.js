@@ -48,25 +48,29 @@ export const cartReducer = (state, action) => {
           ...state,
           cartList,
           total: calculateTotalPrice(cartList),
-          totlaNums: calculateTotalNums(cartList)
+          totalNums: calculateTotalNums(cartList)
         };
 
       case "CHANGE_CART_QUANTITY":
-        cartList[index].quantity = action.payload.quantity;
+        if (index !== -1) {
+          cartList[index].quantity = action.payload.quantity;
+        }
         return {
           ...state,
           cartList,
           total: calculateTotalPrice(cartList),
-          totlaNums: calculateTotalNums(cartList)
+          totalNums: calculateTotalNums(cartList)
         };
 
       case "REMOVE_CART_ITEM":
-        cartList.splice(index, 1);
+        if (index !== -1) {
+          cartList.splice(index, 1);
+        }
         return {
           ...state,
           cartList,
           total: calculateTotalPrice(cartList),
-          totlaNums: calculateTotalNums(cartList)
+          totalNums: calculateTotalNums(cartList)
         };
 
       default:

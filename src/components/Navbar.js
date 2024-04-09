@@ -13,7 +13,7 @@ export default function Navbar() {
         <button className="btn btn-outline-dark position-relative" type="submit">
           購物車
           <span className="badge rounded-pill text-bg-danger
-            position-absolute top-0 start-100 translate-middle">{/* sum */state.totlaNums||0}</span>
+            position-absolute top-0 start-100 translate-middle">{/* sum */state.totalNums||0}</span>
         </button>
       </div>
     </nav>);
